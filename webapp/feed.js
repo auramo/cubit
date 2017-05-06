@@ -4,6 +4,7 @@ import * as U from "karet.util"
 const Feed = U.withContext(({country}, {path}) => {
     const value = U.atom("")
     return <div>
+      <a href="/">Back</a>
       <h3>{country}</h3>
       <p>Feed stuff</p>
       <p>{path}</p>

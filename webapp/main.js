@@ -6,7 +6,7 @@ import ReactDOM from "react-dom"
 import Feed from "./feed"
 
 const contextBuilder = (path) => ({
-  path: U.atom(path)
+  state: U.atom({path})
 })
 
 const context = contextBuilder(window.location.hash)
@@ -18,11 +18,13 @@ const routes = {
 
 const NotFound = () => <div>Sorry, not found</div>
 
-const Page = U.withContext(({routes}, {path}) => U.fromKefir(K(path, path => {
-  console.log("path", path)
-    return React.createElement(routes[path] || NotFound)
+const Page = U.withContext(({routes}, {state}) => U.fromKefir(K(state, state => {
+  console.log("path", state.path)
+    return React.createElement(routes[state.path] || NotFound)
   }
 )))
 
-ReactDOM.render(<U.Context {...{context}}><Page {...{routes}}/></U.Context>,
+ReactDOM.render(
+  <U.Context {...{context}}><Page {...{routes}}/>
+  </U.Context>,
   document.getElementById("main"))

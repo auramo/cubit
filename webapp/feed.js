@@ -1,13 +1,12 @@
 import React from "karet"
 import * as U from "karet.util"
 
-const Feed = U.withContext(({country}, {path}) => {
+const Feed = U.withContext((_, y) => {
+  console.log("y", y)
     const value = U.atom("")
     return <div>
       <a href="/">Back</a>
-      <h3>{country}</h3>
       <p>Feed stuff</p>
-      <p>{path}</p>
       <input
         onChange={e => value.set(e.currentTarget.value)}
       />

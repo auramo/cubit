@@ -6,7 +6,7 @@ import ReactDOM from "react-dom"
 import Feed from "./feed"
 
 const contextBuilder = (path) => ({
-  state: U.atom({path})
+  state: U.atom({path, feedStuff: "x"})
 })
 
 const context = contextBuilder(window.location.hash)

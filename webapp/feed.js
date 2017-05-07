@@ -5,7 +5,7 @@ const Feed = U.withContext((_, {state}) => {
   console.log("state", state)
     const value = U.atom("")
     return <div>
-      <a href="/">Back</a>
+      <a href="/#/">Back</a>
       <p>Feed stuff</p>
       <span>{U.view("feedStuff", state)}</span>
       <input

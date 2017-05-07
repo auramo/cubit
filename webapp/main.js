@@ -5,14 +5,22 @@ import React from "karet"
 import ReactDOM from "react-dom"
 import Feed from "./feed"
 
-const contextBuilder = (path) => ({
-  state: U.atom({path, feedStuff: "x"})
-})
+const contextBuilder = (path) => {
+  window.stateAtom = U.atom({path, feedStuff: "x"})
+  return {state: window.stateAtom}
+}
 
 const context = contextBuilder(window.location.hash)
 
+const onHashChange = (evt) => {
+  window.stateAtom.modify((current) => ({...current, path: window.location.hash}))
+}
+
+const Index = () => <div>hello <a href="/#/feed">feed</a></div>
+
 const routes = {
-  "": () => <div>hello </div>,
+  "": Index,
+  "#/": Index,
   "#/feed": Feed
 }
 
@@ -28,3 +36,5 @@ ReactDOM.render(
   <U.Context {...{context}}><Page {...{routes}}/>
   </U.Context>,
   document.getElementById("main"))
+
+window.addEventListener("hashchange", onHashChange, false);
